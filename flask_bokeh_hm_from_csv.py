@@ -103,9 +103,6 @@ def home_page():
     js_resources = INLINE.render_js()
     css_resources = INLINE.render_css()
     # note that heapmap below is defined under if-name-main block
-    filename = 'data/Example_file.csv'
-    df, sample_lst, gene_lst = get_dataframe_and_axes(filename, 'Gene ID')
-    heatmap = make_heatmap_object(df, sample_lst, gene_lst)
     script, div = components(heatmap)
     html = flask.render_template(
         'embed_hm2.html',
@@ -117,6 +114,9 @@ def home_page():
     return encode_utf8(html)
 
 if __name__ == "__main__":
-    print(__doc__)    
+    #print(__doc__)
+    filename = 'data/Example_file.csv'
+    df, sample_lst, gene_lst = get_dataframe_and_axes(filename, 'Gene ID')
+    heatmap = make_heatmap_object(df, sample_lst, gene_lst)
     app.run()
 

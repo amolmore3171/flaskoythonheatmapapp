@@ -105,8 +105,6 @@ def home_page():
     js_resources = INLINE.render_js()
     css_resources = INLINE.render_css()
     # note that heapmap below is defined under if-name-main block
-    df, years, months = get_dataframe_and_axes()
-    heatmap = make_heatmap_object(df, years, months)
     script, div = components(heatmap)
     html = flask.render_template(
         'embed_hm.html',
@@ -118,6 +116,8 @@ def home_page():
     return encode_utf8(html)
 
 if __name__ == "__main__":
-    print(__doc__)    
+    print(__doc__)
+    df, years, months = get_dataframe_and_axes()
+    heatmap = make_heatmap_object(df, years, months)
     app.run()
 
