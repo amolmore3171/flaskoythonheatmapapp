@@ -89,7 +89,7 @@ def make_heatmap_object():
 
 	#Input GeoJSON source that contains features for plotting.
 	#geosource = GeoJSONDataSource(geojson = json_data(2018))
-	geosource = GeoJSONDataSource(geojson = json_data())
+	geosource = GeoJSONDataSource(geojson=json_data())
 
 	#Define a sequential multi-hue color palette.
 	palette = brewer['YlGnBu'][8]
