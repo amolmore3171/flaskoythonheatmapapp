@@ -33,7 +33,7 @@ import json
 #def json_data(selectedYear):
 def json_data():
     #yr = selectedYear
-    df_yr = df[df['year'] == 2018]
+    df_yr = df[df['year'] == '2018']
     merged = gdf.merge(df_yr, left_on = 'state_code', right_on = 'state_code', how = 'left')
     merged.fillna('No data', inplace = True)
     merged_json = json.loads(merged.to_json())
