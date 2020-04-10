@@ -29,16 +29,6 @@ from bokeh.models import GeoJSONDataSource, LinearColorMapper, ColorBar
 from bokeh.palettes import brewer
 import json
 
-def json_data1(df, selectedYear):
-    yr = selectedYear
-    df_yr = df[df['year'] == yr]
-    merged = gdf.merge(df_yr, left_on = 'state_code', right_on = 'state_code', how = 'left')
-    merged.fillna('No data', inplace = True)
-    merged_json = json.loads(merged.to_json())
-    json_data = json.dumps(merged_json)
-    return json_data
-
-
 
 def make_heatmap_object():
 	shapefile='data/tl_2017_us_state.shp'
@@ -70,7 +60,7 @@ def make_heatmap_object():
 	json_data = json.dumps(merged_json)
 
 	# Input GeoJSON source that contains features for plotting.
-	geosource = GeoJSONDataSource(geojson=json_data1(df, 2018))
+	geosource = GeoJSONDataSource(geojson=json_data)
 
 	# Define a sequential multi-hue color palette.
 	palette = brewer['YlGnBu'][8]
