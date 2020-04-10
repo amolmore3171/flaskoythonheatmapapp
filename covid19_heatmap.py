@@ -30,9 +30,10 @@ from bokeh.palettes import brewer
 import json
 
 
-def json_data(selectedYear):
-    yr = selectedYear
-    df_yr = df[df['year'] == yr]
+#def json_data(selectedYear):
+def json_data():
+    #yr = selectedYear
+    df_yr = df[df['year'] == 2018]
     merged = gdf.merge(df_yr, left_on = 'state_code', right_on = 'state_code', how = 'left')
     merged.fillna('No data', inplace = True)
     merged_json = json.loads(merged.to_json())
@@ -87,7 +88,8 @@ def make_heatmap_object():
 	json_data = json.dumps(merged_json)
 
 	#Input GeoJSON source that contains features for plotting.
-	geosource = GeoJSONDataSource(geojson = json_data(2018))
+	#geosource = GeoJSONDataSource(geojson = json_data(2018))
+	geosource = GeoJSONDataSource(geojson = json_data())
 
 	#Define a sequential multi-hue color palette.
 	palette = brewer['YlGnBu'][8]
