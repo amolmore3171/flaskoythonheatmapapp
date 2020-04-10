@@ -1,27 +1,3 @@
-'''This example demonstrates embedding a standalone Bokeh figure
-into a simple Flask application, with a basic HTML web form using Flask.
-Presently, this code is a hybrid of examples found at these locations:
-    bokeh/examples/embed/simple
-    http://bokeh.pydata.org/en/latest/docs/gallery/unemployment.html
-
-For flask to render it, make sure the embed_hm.html file is in the templates folder
-
-Folder structure:
-/app_example
-    flask_bokeh_heatmap.py
-    /templates
-        embed_hm.html
-
-To run it type:
-
-    python flask_bokeh_heatmap.py
-
-in the app_example directory, and navigate to:
-
-    http://localhost:5000
-
-to see the heat map
-'''
 from __future__ import print_function
 from math import pi
 import pandas as pd
@@ -64,8 +40,7 @@ def json_data(selectedYear):
     return json_data
 	
 def make_heatmap_object():
-    ''' makes a bokeh figure '''
-    shapefile = 'data/tl_2017_us_state.shp'
+	shapefile = 'data/tl_2017_us_state.shp'
 	datafile = 'data/usa_state_covid.csv'
 
 	gdf = gpd.read_file(shapefile)[['STUSPS', 'NAME', 'geometry']]
@@ -146,31 +121,19 @@ def make_heatmap_object():
 
 
 	p.add_layout(color_bar, 'below')
-	
-    return p
+	return p
 
 
 app = flask.Flask(__name__)
 
 @app.route("/")
 def home_page():
-    """ Simple embedding of a bokeh figure in Flask
-
-    """
     js_resources = INLINE.render_js()
     css_resources = INLINE.render_css()
-    # note that heapmap below is defined under if-name-main block
-	
 	heatmap = make_heatmap_object()
     script, div = components(heatmap)
-    html = flask.render_template(
-        'embed_hm2.html',
-        plot_script=script,
-        plot_div=div,
-        js_resources=js_resources,
-        css_resources=css_resources
-    )
-    return encode_utf8(html)
+    html = flask.render_template('embed_hm2.html',plot_script=script,plot_div=div,js_resources=js_resources,css_resources=css_resources)
+	return encode_utf8(html)
 
 if __name__ == "__main__":
     print(__doc__)
