@@ -105,7 +105,7 @@ def home_page():
 	css_resources = INLINE.render_css()
 	heatmap = make_heatmap_object()
 	script, div = components(heatmap)
-	html = flask.render_template('embed_hm2.html',plot_script=script,plot_div=div,js_resources=js_resources,css_resources=css_resources)
+	html = flask.render_template('embed_hm.html',plot_script=script,plot_div=div,js_resources=js_resources,css_resources=css_resources)
 	return encode_utf8(html)
 
 if __name__ == "__main__":
