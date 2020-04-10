@@ -41,7 +41,7 @@ def json_data(selectedYear):
 
 
 def make_heatmap_object():
-	shapefile='data/usa_state/tl_2017_us_state.shp'
+	shapefile='data/tl_2017_us_state.shp'
 	datafile='data/usa_state_covid.csv'
 
 	gdf = gpd.read_file(shapefile)[['STUSPS', 'NAME', 'geometry']]
