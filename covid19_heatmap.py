@@ -38,7 +38,7 @@ def json_data(selectedYear):
     merged_json = json.loads(merged.to_json())
     json_data = json.dumps(merged_json)
     return json_data
-	
+
 def make_heatmap_object():
 	shapefile = 'data/tl_2017_us_state.shp'
 	datafile = 'data/usa_state_covid.csv'
@@ -85,7 +85,7 @@ def make_heatmap_object():
 
 	#Convert to str like object
 	json_data = json.dumps(merged_json)
-	
+
 	#Input GeoJSON source that contains features for plotting.
 	geosource = GeoJSONDataSource(geojson = json_data(2018))
 
@@ -105,7 +105,7 @@ def make_heatmap_object():
 	hover = HoverTool(tooltips = [ ('state','@state'),('count', '@count')])
 
 
-	#Create color bar. 
+	#Create color bar.
 	color_bar = ColorBar(color_mapper=color_mapper, label_standoff=8,width = 500, height = 20,
 						 border_line_color=None,location = (0,0), orientation = 'horizontal', major_label_overrides = tick_labels)
 
@@ -115,7 +115,7 @@ def make_heatmap_object():
 	p.xgrid.grid_line_color = None
 	p.ygrid.grid_line_color = None
 
-	#Add patch renderer to figure. 
+	#Add patch renderer to figure.
 	p.patches('xs','ys', source = geosource,fill_color = {'field' :'count', 'transform' : color_mapper},
 			  line_color = 'black', line_width = 0.25, fill_alpha = 1)
 
@@ -128,14 +128,14 @@ app = flask.Flask(__name__)
 
 @app.route("/")
 def home_page():
-    js_resources = INLINE.render_js()
-    css_resources = INLINE.render_css()
+	js_resources = INLINE.render_js()
+	css_resources = INLINE.render_css()
 	heatmap = make_heatmap_object()
-    script, div = components(heatmap)
-    html = flask.render_template('embed_hm2.html',plot_script=script,plot_div=div,js_resources=js_resources,css_resources=css_resources)
+	script, div = components(heatmap)
+	html = flask.render_template('embed_hm2.html',plot_script=script,plot_div=div,js_resources=js_resources,css_resources=css_resources)
 	return encode_utf8(html)
 
 if __name__ == "__main__":
-    print(__doc__)
-    app.run()
+	print(__doc__)
+	app.run()
 
