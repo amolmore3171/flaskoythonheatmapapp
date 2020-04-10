@@ -34,8 +34,8 @@ def json_data(selectedYear):
     df_yr = df[df['year'] == yr]
     merged = gdf.merge(df_yr, left_on = 'state_code', right_on = 'state_code', how = 'left')
     merged.fillna('No data', inplace = True)
-    merged_json = json.loads(merged.to_json())
-    json_data = json.dumps(merged_json)
+    #merged_json = json.loads(merged.to_json())
+    json_data = json.dumps(json.loads(merged.to_json()))
     return json_data
 
 
