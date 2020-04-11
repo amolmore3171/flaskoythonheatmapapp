@@ -1,5 +1,6 @@
 import random
-import StringIO
+#import StringIO
+from io import StringIO
 
 from flask import Flask, make_response
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
